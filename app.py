@@ -3,14 +3,14 @@ from flask import Flask, request, jsonify, render_template
 import pickle
 
 # Create flask app
-flask_app = Flask(__name__)
+app = Flask(__name__)
 model = pickle.load(open("model.pkl", "rb"))
 
-@flask_app.route("/")
+@app.route("/")
 def Home():
     return render_template("index.html")
 
-@flask_app.route("/predict", methods = ["POST"])
+@app.route("/predict", methods = ["POST"])
 def predict():
     input_data = [(x) for x in request.form.values()]
     if input_data[1] == "male":
@@ -61,4 +61,4 @@ def predict():
 
 
 if __name__ == "__main__":
-    flask_app.run(debug=True)
+    app.run(debug=True)
